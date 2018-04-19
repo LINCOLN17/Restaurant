@@ -12,9 +12,10 @@ using System;
 namespace Restaurant.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext<User, Role, int>))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180419173121_seeds2")]
+    partial class seeds2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
