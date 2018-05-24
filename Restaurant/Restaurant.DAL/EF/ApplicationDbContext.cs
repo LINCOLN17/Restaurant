@@ -17,7 +17,7 @@ namespace Restaurant.DAL.EF
         // public virtual DbSet<Entity> TableName { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<SmallTable> SmallTables { get; set; }
-        public DbSet<StatusReservation> StatusReservations { get; set; }
+        //public DbSet<StatusReservation> StatusReservations { get; set; } // deleted, enum class created in reservation entity
 
         public ApplicationDbContext(ConnectionStringDto connectionStringDto)
         {

@@ -12,8 +12,8 @@ using System;
 namespace Restaurant.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext<User, Role, int>))]
-    [Migration("20180413093948_Seeds")]
-    partial class Seeds
+    [Migration("20180427094321_enumStatus")]
+    partial class enumStatus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -105,7 +105,7 @@ namespace Restaurant.DAL.Migrations
 
             modelBuilder.Entity("Restaurant.BLL.Entities.Reservation", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ReservationId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateCreated");
@@ -116,13 +116,11 @@ namespace Restaurant.DAL.Migrations
 
                     b.Property<DateTime>("Start");
 
-                    b.Property<int?>("StatusID");
+                    b.Property<int>("Status");
 
-                    b.Property<string>("UserID");
+                    b.Property<string>("UserId");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("StatusID");
+                    b.HasKey("ReservationId");
 
                     b.ToTable("Reservations");
                 });
@@ -153,12 +151,12 @@ namespace Restaurant.DAL.Migrations
 
             modelBuilder.Entity("Restaurant.BLL.Entities.SmallTable", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("SmallTableId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("NumberOfChairs");
 
-                    b.HasKey("ID");
+                    b.HasKey("SmallTableId");
 
                     b.ToTable("SmallTables");
                 });
@@ -174,20 +172,6 @@ namespace Restaurant.DAL.Migrations
                     b.HasIndex("ReservationId");
 
                     b.ToTable("SmallTableReservation");
-                });
-
-            modelBuilder.Entity("Restaurant.BLL.Entities.StatusReservation", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("StatusReservations");
                 });
 
             modelBuilder.Entity("Restaurant.BLL.Entities.User", b =>
@@ -284,13 +268,6 @@ namespace Restaurant.DAL.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Restaurant.BLL.Entities.Reservation", b =>
-                {
-                    b.HasOne("Restaurant.BLL.Entities.StatusReservation", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusID");
                 });
 
             modelBuilder.Entity("Restaurant.BLL.Entities.SmallTableReservation", b =>

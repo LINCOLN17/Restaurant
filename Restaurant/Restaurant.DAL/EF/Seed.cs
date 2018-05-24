@@ -9,9 +9,9 @@ namespace Restaurant.DAL.EF
         public static void RunSeed(DbContext context, RoleManager<Role> roleManager, UserManager<User> userManager)
         {
             // Seed operations
-            AddRoles(context);
-            AddStatusReservations(context);
-            AddSmallTables(context);
+            //AddRoles(context);
+            //AddSmallTables(context);
+            //AddReservations(context);
 
         }
 
@@ -24,14 +24,15 @@ namespace Restaurant.DAL.EF
             _context.SaveChanges();
         }
 
-        private static void AddStatusReservations(DbContext _context)
-        {
-            _context.AddRange(
-                new StatusReservation { Name = "Cancelled", Description = "Cancelled" },
-                new StatusReservation { Name = "Reserved", Description = "Reserved" }
-                );
-            _context.SaveChanges();
-        }
+        // deleted
+        //private static void AddStatusReservations(DbContext _context)
+        //{
+        //    _context.AddRange(
+        //        new StatusReservation { Name = "Cancelled", Description = "Cancelled" },
+        //        new StatusReservation { Name = "Reserved", Description = "Reserved" }
+        //        );
+        //    _context.SaveChanges();
+        //}
 
         private static void AddSmallTables(DbContext _context)
         {
@@ -50,6 +51,17 @@ namespace Restaurant.DAL.EF
                 new SmallTable { NumberOfChairs = 5 },
                 new SmallTable { NumberOfChairs = 5 },
                 new SmallTable { NumberOfChairs = 5 }
+                );
+            _context.SaveChanges();
+        }
+
+        private static void AddReservations(DbContext _context)
+        {
+            _context.AddRange(
+                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeoples = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
+                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeoples = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
+                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeoples = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
+                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeoples = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" }
                 );
             _context.SaveChanges();
         }

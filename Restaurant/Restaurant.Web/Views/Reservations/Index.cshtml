@@ -1,0 +1,20 @@
+﻿@using Restaurant.ViewModels
+@model IEnumerable<Restaurant.ViewModels.ReservationVm>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>ReservationVm</h4>
+    @Html.ActionLink("Create", "Create", "Reservations")
+    <hr />
+    @foreach (var reservation in Model)
+    {
+        @Html.Partial("_ReservationPartial", reservation)
+
+    }
+</div>
+

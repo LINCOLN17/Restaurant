@@ -16,6 +16,7 @@ namespace Restaurant.Web.Configuration
                     .ForMember(dest => dest.Roles, member => member.MapFrom(src =>
                          userManager.GetRolesAsync(src).Result
                     ));
+                cfg.CreateMap<Reservation, ReservationVm>();
             });
             return configurationExpression;
         }

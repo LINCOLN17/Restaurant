@@ -7,9 +7,10 @@ namespace Restaurant.BLL.Entities
 {
     public class Reservation
     {
-        public int ID { get; set; }
+        
+        public int ReservationId { get; set; }
 
-        public string UserID { get; set; }
+        public string UserId { get; set; }
 
         public int NumberOfPeoples { get; set; }
 
@@ -27,4 +28,11 @@ namespace Restaurant.BLL.Entities
 
         public virtual ICollection<SmallTableReservation> SmallTables { get; set; }
     }
+
+    public enum StatusReservation
+    {
+        Cancelled,
+        Reserved
+    }
+        
 }
