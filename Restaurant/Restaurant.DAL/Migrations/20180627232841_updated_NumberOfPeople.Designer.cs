@@ -12,8 +12,8 @@ using System;
 namespace Restaurant.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext<User, Role, int>))]
-    [Migration("20180427094321_enumStatus")]
-    partial class enumStatus
+    [Migration("20180627232841_updated_NumberOfPeople")]
+    partial class updated_NumberOfPeople
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

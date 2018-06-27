@@ -58,10 +58,10 @@ namespace Restaurant.DAL.EF
         private static void AddReservations(DbContext _context)
         {
             _context.AddRange(
-                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeoples = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
-                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeoples = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
-                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeoples = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
-                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeoples = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" }
+                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeople = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
+                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeople = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
+                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeople = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" },
+                new Reservation { DateCreated = System.DateTime.Now, Duration = System.DateTime.Now, NumberOfPeople = 3, Start = System.DateTime.Now, Status = StatusReservation.Reserved, UserId = "1" }
                 );
             _context.SaveChanges();
         }

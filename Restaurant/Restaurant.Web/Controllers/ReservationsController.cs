@@ -99,12 +99,12 @@ namespace Restaurant.Web.Controllers
             var tablesVm = Mapper.Map<IEnumerable<SmallTable>>(allTables);
 
             // find reserved tables
-            //var reserved = Uow.Repository<Reservation>().GetRange(
-            //    r => r.Status == StatusReservation.Reserved
-            //        && r.Start.Date == startTime.Date)
-            //        .SelectMany(r => r.SmallTables.Select(s => s.SmallTable).Distinct())
-            //                             .ToList();
-            //var reservedVM = Mapper.Map<IEnumerable<SmallTable>>(reserved);
+            var reserved = Uow.Repository<Reservation>().GetRange(
+                r => r.Status == StatusReservation.Reserved
+                    && r.Start.Date == startTime.Date);
+                    //.SelectMany(r => r.SmallTables.Select(s => s.SmallTable).Distinct());
+                                         
+            var reservedVM = Mapper.Map<IEnumerable<Reservation>>(reserved);
 
 
             // filter out reserved, leave avaible
@@ -137,6 +137,9 @@ namespace Restaurant.Web.Controllers
 
 
             }
+
+            
+
             //ViewData.Clear();
             //ViewBag.Termins = avaibleTimes;
 
@@ -163,8 +166,17 @@ namespace Restaurant.Web.Controllers
         {
             try
             {
+                var reservation = new Reservation();
+                reservation.DateCreated = DateTime.Now;
+                reservation.Duration = Convert.ToDateTime(collection["Duration"]);
+                reservation.NumberOfPeople = Convert.ToInt32(collection["NumberOfPeople"]);
+                //reservation.SmallTables = new SmallTableReservation(1,1,1,1);
+                reservation.Start = Convert.ToDateTime(collection["Start"]);
+                reservation.Status = StatusReservation.Reserved;
+                reservation.UserId = _userManager.GetUserId(User);
                 // TODO: Add insert logic here
-
+                Uow.Repository<Reservation>().Add(reservation);
+                Uow.Save();
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -11,7 +11,7 @@ namespace Restaurant.ViewModels
         public DateTime Start { get; set; }
         public DateTime Duration { get; set; }
         public StatusReservation Status { get; set; }
-        public int NumberOfPeoples { get; set; }
+        public int NumberOfPeople { get; set; }
         public ICollection<SmallTableReservation> SmallTables { get; set; }
     }
 }

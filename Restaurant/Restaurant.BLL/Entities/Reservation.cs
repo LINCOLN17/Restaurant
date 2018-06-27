@@ -12,7 +12,7 @@ namespace Restaurant.BLL.Entities
 
         public string UserId { get; set; }
 
-        public int NumberOfPeoples { get; set; }
+        public int NumberOfPeople { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime Start { get; set; }

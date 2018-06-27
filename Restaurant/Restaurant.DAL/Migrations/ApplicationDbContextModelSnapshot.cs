@@ -111,7 +111,7 @@ namespace Restaurant.DAL.Migrations
 
                     b.Property<DateTime>("Duration");
 
-                    b.Property<int>("NumberOfPeoples");
+                    b.Property<int>("NumberOfPeople");
 
                     b.Property<DateTime>("Start");
 
