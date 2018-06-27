@@ -1,20 +1,109 @@
 ﻿@using Restaurant.ViewModels
 @model IEnumerable<Restaurant.ViewModels.ReservationVm>
 
+@*@ViewBag.Termins*@
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
+<div class="container-fluid">
+    <div class="col-lg-6" style="overflow-y:auto; height:400px">
+        <h4>ReservationVm</h4>
+        @Html.ActionLink("Create", "Create", "Reservations")
+        <hr />
+        @foreach (var reservation in Model)
+        {
+            @Html.Partial("_ReservationPartial", reservation)
 
-<div>
-    <h4>ReservationVm</h4>
-    @Html.ActionLink("Create", "Create", "Reservations")
-    <hr />
-    @foreach (var reservation in Model)
-    {
-        @Html.Partial("_ReservationPartial", reservation)
+        }
+    </div>
+    <div class="col-lg-6">
+        <div id="Content">
+            <input type="button" id="btnSearch" class="btn btn-warning" style="height:35px;width:120px" value="Search" /><br />
+            @*min="@DateTime.Now.Date.ToString("yyyy.mm.dd") value=" @DateTime.Now.Date.ToString("yyyy.mm.dd")*@
+            <label>Date:</label><input type="date" id="date" name="date" /><br />
+            <label>Time:</label><input type="time" id="time" name="time" value="10:00" min="10:00" max="21:45" /><br />
+            <label>Duration(minutes):</label><input type="number" id="duration" name="duration" step="15" min="15" value="15" /><br />
+            <label>People:</label><input type="number" id="people" name="people" value="1" min="1" max="5" />
+                <div style="overflow-y:auto; height:400px">
+                    <table class="table table-bordered" id="Table">
+                        <tr>
+                            <th>Number</th>
+                        </tr>
+                    </table>
+                </div>
 
-    }
+            <script>
+            $('#btnSearch').click(function () {
+            $.ajax({
+                url: '@Url.Action("GetFreeTerms", "Reservations")',
+                data: {
+                    Date: $("#date").val(),
+                    Time: $("#time").val(),
+                    Duration: $("#duration").val(),
+                    People: $("#people").val()
+                },
+                type: 'GET',
+                success: function (data) {
+                    $("#Table tr").empty(); // clear previous elements in this div
+                    $("#DIV").html(data);
+                    var DIV = '';
+                    $.each(data, function (i, item) {
+                        var rows = "<tr>" +
+                            "<td id = 'Number'>" + item + "</td>" +
+                            "<td id = 'Number'><input type='button' id='btnReserv' class='btn btn-success' value='Choose this time for start reservation' /></td>" +
+                        "</tr>";
+                        $('#Table').append(rows);
+                    }); //End of foreach Loop
+                    console.log(data);
+                }
+            });
+                });
+            </script>
+            @*<script>*@
+            @*$('#btnSearch').click(function () {
+            $.ajax({
+                url: '@Url.Action("AvaibleTerms", "Reservations")',
+                data: {
+                    Date: $("#date").val(),
+                    TimeStart: $("#timeStart").val(),
+                    Duration: $("#duration").val(),
+                    People: $("#people").val()
+                },
+                type: 'POST',
+                success: function (data) {
+                    $("#divContent").html(data);
+                    $.each(data, function (i, item) {
+                        var rows = "<tr>" +
+                            "<td id='RegdNo'>" + item.regNo + "</td>" +
+                            "<td id='Name'>" + item.name + "</td>" +
+                            "<td id='Address'>" + item.address + "</td>" +
+                            "<td id='PhoneNo'>" + item.phoneNo + "</td>" +
+                            "<td id='AdmissionDate'>" + Date(item.admissionDate,
+                                "dd-MM-yyyy") + "</td>" +
+                            "</tr>";
+                        $('#Table').append(rows);
+                    }); //End of foreach Loop
+                    console.log(data);
+                }
+            });
+        });*@
+            @*</script>
+        @if (ViewBag.Termins != null)
+        {
+        <ul>@((ViewBag.Termins as List<TimeSpan>))
+            @foreach (var item in ViewBag.Termins)
+            {
+                <li>@item</li>
+            }
+
+        </ul>
+
+        }*@
+        </div>
+    </div>
+
 </div>
 

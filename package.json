@@ -1,0 +1,30 @@
+{
+  "name": "Restaurant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "ts-loader": "^4.3.0",
+    "typescript": "^2.8.3",
+    "vue": "^2.5.16",
+    "vue-loader": "^15.2.0",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.8.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LINCOLN17/Restaurant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LINCOLN17/Restaurant/issues"
+  },
+  "homepage": "https://github.com/LINCOLN17/Restaurant#readme"
+}

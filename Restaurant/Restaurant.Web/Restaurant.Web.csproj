@@ -5,6 +5,7 @@
     <UserSecretsId>aspnet-Restaurant.Web.Web-0571C67E-2B07-44F4-B6AF-E64496D3E63F</UserSecretsId>
     <RootNamespace>Restaurant.Web</RootNamespace>
     <AssemblyName>Restaurant.Web</AssemblyName>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
 
 

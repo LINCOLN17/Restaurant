@@ -7,6 +7,7 @@ namespace Restaurant.ViewModels
 {
     public class ReservationVm
     {
+        public int ReservationId { get; set; }
         public DateTime Start { get; set; }
         public DateTime Duration { get; set; }
         public StatusReservation Status { get; set; }
