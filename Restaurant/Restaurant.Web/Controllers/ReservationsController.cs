@@ -112,24 +112,27 @@ namespace Restaurant.Web.Controllers
 
             var avaibleTimes = new List<TimeSpan>();
             //avaibleTimes.Clear(); // need to clear List, because by AJAX we are adding next terms
+            var startTimeSpan = new TimeSpan(time.Hour, time.Minute, time.Second);
+            var maxTimeSpan = new TimeSpan(22, 0, 0);
+            var durationTimeSpan = new TimeSpan(0, duration, 0);
 
             if (duration != 0)
             {
                 //int openHours = 22;
                 //if (duration % 60 == 0) openHours -= 1 + duration/60;
-                int maxHour = 21;
-                int maxMinute = 45;
-                for (int i = time.Hour; i < maxHour; i+= duration/60)
+                //int maxHour = 21;
+                //int maxMinute = 45;
+                for (var i = startTimeSpan; i < maxTimeSpan; i += durationTimeSpan)
                 {
-                    if(duration%60>0)
-                    for (int j = 0; j <= 60; j+=duration%60)
-                    {
-                        avaibleTimes.Add(new TimeSpan(i, j * duration, 0));
-                    }
-                    else
-                    {
-                        avaibleTimes.Add(new TimeSpan(i, 0, 0));
-                    }
+                    //if(duration%60>0)
+                    //for (int j = 0; j <= 60; j+=duration%60)
+                    //{
+                        avaibleTimes.Add(new TimeSpan(i.Hours,i.Minutes,0));
+                    //}
+                    //else
+                    //{
+                    //    avaibleTimes.Add(new TimeSpan(i, 0, 0));
+                    //}
                 }
 
 
