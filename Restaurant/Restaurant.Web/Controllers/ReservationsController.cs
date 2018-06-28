@@ -34,7 +34,8 @@ namespace Restaurant.Web.Controllers
             if (User.IsInRole("User"))
             {
                 var reservationEntities = Uow.Repository<Reservation>().GetRange(r => r.UserId == uId);
-                var reservationVm = Mapper.Map<IEnumerable<ReservationVm>>(reservationEntities);
+                var reservationVm = Mapper.Map<IEnumerable<ReservationVm>>(reservationEntities).OrderByDescending(r=>r.Start);
+                //reservationVm.OrderBy(s => s.Start.Date).Distinct();
                 return View(reservationVm);
             }
 
@@ -208,10 +209,15 @@ namespace Restaurant.Web.Controllers
             }
         }
 
-        // GET: Reservations/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Reservations/Cancel/5
+        public ActionResult Cancel(int id)
         {
-            return View();
+            var reservation = new Reservation();
+            reservation = Uow.Repository<Reservation>().Get(r=>r.ReservationId == id);
+            reservation.Status = StatusReservation.Cancelled;
+            Uow.Repository<Reservation>().Update(reservation);
+            Uow.Save();
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Reservations/Delete/5

@@ -33,7 +33,7 @@
                     </tr>
                 </table>
             </div>
-            
+
             <script>
             $('#btnSearch').click(function () {
             $.ajax({
@@ -52,7 +52,7 @@
                     $.each(data, function (i, item) {
                         var rows = "<tr>" +
                             "<td id = 'Number'>" + item + "</td>" +
-                            "<td id = 'Number'><a href='#' class='btn btn-success' role='button'>Choose this time for start reservation</a></td>" +
+                            "<td id = 'Number'><input type='button' id='btnCreate' class='btn btn-success' value='Choose this time for start reservation' /></td>" +
                         "</tr>";
                         $('#Table').append(rows);
                     }); //End of foreach Loop
@@ -63,44 +63,44 @@
             </script>
             @*<script>*@
             @*$('#btnSearch').click(function () {
-                    $.ajax({
-                        url: '@Url.Action("AvaibleTerms", "Reservations")',
-                        data: {
-                            Date: $("#date").val(),
-                            TimeStart: $("#timeStart").val(),
-                            Duration: $("#duration").val(),
-                            People: $("#people").val()
-                        },
-                        type: 'POST',
-                        success: function (data) {
-                            $("#divContent").html(data);
-                            $.each(data, function (i, item) {
-                                var rows = "<tr>" +
-                                    "<td id='RegdNo'>" + item.regNo + "</td>" +
-                                    "<td id='Name'>" + item.name + "</td>" +
-                                    "<td id='Address'>" + item.address + "</td>" +
-                                    "<td id='PhoneNo'>" + item.phoneNo + "</td>" +
-                                    "<td id='AdmissionDate'>" + Date(item.admissionDate,
-                                        "dd-MM-yyyy") + "</td>" +
-                                    "</tr>";
-                                $('#Table').append(rows);
-                            }); //End of foreach Loop
-                            console.log(data);
-                        }
-                    });
-                });*@
+            $.ajax({
+                url: '@Url.Action("AvaibleTerms", "Reservations")',
+                data: {
+                    Date: $("#date").val(),
+                    TimeStart: $("#timeStart").val(),
+                    Duration: $("#duration").val(),
+                    People: $("#people").val()
+                },
+                type: 'POST',
+                success: function (data) {
+                    $("#divContent").html(data);
+                    $.each(data, function (i, item) {
+                        var rows = "<tr>" +
+                            "<td id='RegdNo'>" + item.regNo + "</td>" +
+                            "<td id='Name'>" + item.name + "</td>" +
+                            "<td id='Address'>" + item.address + "</td>" +
+                            "<td id='PhoneNo'>" + item.phoneNo + "</td>" +
+                            "<td id='AdmissionDate'>" + Date(item.admissionDate,
+                                "dd-MM-yyyy") + "</td>" +
+                            "</tr>";
+                        $('#Table').append(rows);
+                    }); //End of foreach Loop
+                    console.log(data);
+                }
+            });
+        });*@
             @*</script>
-                @if (ViewBag.Termins != null)
-                {
-                <ul>@((ViewBag.Termins as List<TimeSpan>))
-                    @foreach (var item in ViewBag.Termins)
-                    {
-                        <li>@item</li>
-                    }
+        @if (ViewBag.Termins != null)
+        {
+        <ul>@((ViewBag.Termins as List<TimeSpan>))
+            @foreach (var item in ViewBag.Termins)
+            {
+                <li>@item</li>
+            }
 
-                </ul>
+        </ul>
 
-                }*@
+        }*@
         </div>
     </div>
 
