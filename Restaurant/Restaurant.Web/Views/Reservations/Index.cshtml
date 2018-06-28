@@ -33,7 +33,6 @@
                     </tr>
                 </table>
             </div>
-
             <script>
             $('#btnSearch').click(function () {
             $.ajax({
@@ -48,19 +47,82 @@
                 success: function (data) {
                     $("#Table tr").empty(); // clear previous elements in this div
                     $("#DIV").html(data);
+
                     var DIV = '';
                     $.each(data, function (i, item) {
                         var rows = "<tr>" +
-                            "<td id = 'Number'>" + item + "</td>" +
-                            "<td id = 'Number'><input type='button' id='btnCreate' class='btn btn-success' value='Choose this time for start reservation' /></td>" +
+                            //"<td id = 'Number'>" + item + "</td>" +
+                            "<td id = 'Number'><input type='button' id='btnCreate"+i+"' class='btn btn-success' style='height: 35px; width: 120px' value='"+ item +"' /> </td > " +
+                            //< input type = 'button' id = 'btnCreate' class='btn btn-success' value = 'Choose this time for start reservation' /></td > " +
                         "</tr>";
                         $('#Table').append(rows);
+                        $('#btnCreate' + i).click(function () {
+                            
+                            var time =  data[i];
+                            var date = $("#date").val() + " " + time;
+                            var dateLong = new Date(date);
+
+                            var year = dateLong.getFullYear();
+                            var month = dateLong.getMonth()+1;
+                            var day = dateLong.getDate();
+
+                            var hour = dateLong.getHours();
+                            var minute = dateLong.getMinutes();
+                            var second = 0;
+
+                            var duration = Number($("#duration").val());
+                            var durationHour = parseInt(hour);
+                            durationHour += Number(duration / 60);
+                            durationHour = parseInt(durationHour);
+                            var durationMinute = duration % 60 + minute;
+
+                            var start = day + "." + month + "." + year + " " + hour + ":" + minute;
+                            var end = day + "." + month + "." + year + " " + durationHour + ":" + durationMinute;
+                            var people = $("#people").val();
+
+                            //console.log(time);
+                            //console.log(date);
+                            //console.log(dateLong);
+                            //console.log(year);
+                            //console.log(month);
+                            //console.log(day);
+                            //console.log(hour);
+                            //console.log(minute);
+                            //console.log(second);
+                            //console.log(start);
+                            //console.log(end);
+                            //console.log(people);
+                            
+                        });
                     }); //End of foreach Loop
+                    
                     console.log(data);
                 }
             });
                 });
             </script>
+            @*<script>
+            $('#btnCreate').click(function () {
+                $.ajax({
+                    url: '@Url.Action("Create", "Reservations")',
+                    data: {
+                        Date: $(this).parent('form').find('input[name="date"]') + $(this).parent('form').find('input[name="time"]'),
+                        Duration: $(this).parent('form').find('input[name="date"]') + $(this).parent('form').find('input[name="time"]') + $(this).parent('form').find('input[name="duration"]'),
+                        People: $(this).parent('form').find('input[name="people"]')
+                        //Date: $("#date").val() + $("#time").val(),
+                        //Duration: $("#duration").val() + $("#date").val() + $("#time").val(),
+                        //People: $("#people").val()
+
+                    },
+                    type: 'POST',
+
+
+                });
+
+            });
+            console.log("btnCreate");
+        </script>*@
+
             @*<script>*@
             @*$('#btnSearch').click(function () {
             $.ajax({
