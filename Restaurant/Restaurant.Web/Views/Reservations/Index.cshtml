@@ -20,16 +20,17 @@
     </div>
     <div class="col-lg-6">
         <div id="Content">
-            <input type="button" id="btnSearch" class="btn btn-warning" style="height:35px;width:120px" value="Search" /><br />
+
             @*min="@DateTime.Now.Date.ToString("yyyy.mm.dd") value=" @DateTime.Now.Date.ToString("yyyy.mm.dd")*@
             <label>Date:</label><input type="date" id="date" name="date" min="@DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd")" value="@DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd")" /><br />
             <label>Time:</label><input type="time" id="time" name="time" value="10:00" min="10:00" max="21:45" /><br />
             <label>Duration(minutes):</label><input type="number" id="duration" name="duration" step="15" min="15" value="15" /><br />
-            <label>People:</label><input type="number" id="people" name="people" value="1" min="1" max="5" />
+            <label>People:</label><input type="number" id="people" name="people" value="1" min="1" max="5" /><br />
+            <input type="button" id="btnSearch" class="btn btn-warning"  value="Search" /><br />
             <div style="overflow-y:auto; height:400px">
                 <table class="table table-bordered" id="Table">
                     <tr>
-                        <th>Number</th>
+                        <th></th>
                     </tr>
                 </table>
             </div>
@@ -57,7 +58,7 @@
                         "</tr>";
                         $('#Table').append(rows);
                         $('#btnCreate' + i).click(function () {
-                            
+
                             var time =  data[i];
                             var date = $("#date").val() + " " + time;
                             var dateLong = new Date(date);
@@ -80,6 +81,26 @@
                             var end = day + "." + month + "." + year + " " + durationHour + ":" + durationMinute;
                             var people = $("#people").val();
 
+
+                            
+
+                            $.ajax({
+                                url: '@Url.Action("CreateAsync", "Reservations")',
+                                type: 'POST',
+                                data: {
+                                    Start: start,
+                                    End: end,
+                                    People: people
+                                },
+                               
+                                
+                                error: function (xhr, textStatus, errorThrown) {
+                                    alert(xhr.responseText);
+                                }
+                                
+                            })
+                            console.log(data);
+
                             //console.log(time);
                             //console.log(date);
                             //console.log(dateLong);
@@ -89,13 +110,13 @@
                             //console.log(hour);
                             //console.log(minute);
                             //console.log(second);
-                            //console.log(start);
-                            //console.log(end);
-                            //console.log(people);
-                            
+                            console.log(start);
+                            console.log(end);
+                            console.log(people);
+
                         });
                     }); //End of foreach Loop
-                    
+
                     console.log(data);
                 }
             });

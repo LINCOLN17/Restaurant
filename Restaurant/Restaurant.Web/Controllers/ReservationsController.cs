@@ -160,6 +160,34 @@ namespace Restaurant.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IEnumerable<Reservation> CreateAsync(DateTime Start, DateTime End, int People)
+        {
+            var reservations = new List<Reservation>();
+            try
+            {
+                var reservation = new Reservation();
+                reservation.DateCreated = DateTime.Now;
+                reservation.Duration = End;
+                reservation.NumberOfPeople = People;
+                //reservation.SmallTables = new SmallTableReservation(1,1,1,1);
+                reservation.Start = Start;
+                reservation.Status = StatusReservation.Reserved;
+                reservation.UserId = _userManager.GetUserId(User);
+                // TODO: Add insert logic here
+                Uow.Repository<Reservation>().Add(reservation);
+                Uow.Save();
+                return reservations;
+            }
+            catch
+            {
+                return reservations;
+            }
+
+
+            
+        }
+
         // POST: Reservations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
